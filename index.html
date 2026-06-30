@@ -3,17 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aditya Kori | Portfolio</title>
+    <title>Aditya Kori | Design Verification Portfolio</title>
+    <!-- Importing modern typography and icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* Modern Portfolio Styling */
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; margin: 0; scroll-behavior: smooth; color: #333; }
-        nav { position: sticky; top: 0; background: #333; color: white; padding: 1rem; display: flex; justify-content: center; gap: 20px; z-index: 1000; }
-        nav a { color: white; text-decoration: none; font-weight: bold; }
-        nav a:hover { color: #ffcc00; }
-        section { padding: 80px 20px; max-width: 900px; margin: auto; }
-        h1, h2 { color: #2c3e50; }
-        .card { background: #f4f4f4; padding: 20px; margin: 10px 0; border-radius: 8px; }
-        .contact-info { background: #333; color: white; padding: 40px; text-align: center; }
+        /* Modern Premium Tech Aesthetic Styles */
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #161b26;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-color: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --border-color: #242b3d;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            line-height: 1.7; 
+        }
+
+        /* Fixed Navigation Bar */
+        nav { 
+            position: fixed; 
+            top: 0; 
+            width: 100%;
+            background: rgba(11, 15, 25, 0.85); 
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem; 
+            display: flex; 
+            justify-content: center; 
+            gap: 30px; 
+            z-index: 1000; 
+        }
+        nav a { 
+            color: var(--text-muted); 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+        nav a:hover { color: var(--accent-color); }
+
+        /* Hero / About Section Layout */
+        .hero {
+            padding: 140px 20px 80px 20px;
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+        .hero h1 { 
+            font-size: 3rem; 
+            font-weight: 700; 
+            letter-spacing: -0.05em;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffffff, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: auto;
+            font-size: 1.05rem;
+        }
+
+        /* Global Section Layouts */
+        section { 
+            padding: 80px 20px; 
+            max-width: 900px; 
+            margin: auto; 
+            border-top: 1px solid var(--border-color);
+        }
+        h2 { 
+            font-size: 1.8rem; 
+            font-weight: 700; 
+            margin-bottom: 30px; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2 i { color: var(--accent-color); font-size: 1.4rem; }
+
+        /* Grid Framework for Skills & Projects */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .card { 
+            background: var(--card-bg); 
+            padding: 25px; 
+            border: 1px solid var(--border-color);
+            border-radius: 12px; 
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .card:hover { 
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+        }
+        .card h3 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; }
+        
+        .repo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .repo-link:hover { color: var(--accent-hover); }
+
+        /* Tag Pill Badges */
+        .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .tag {
+            background: #1e293b;
+            color: var(--accent-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Footer & Contact Section */
+        footer { 
+            background: #070a10; 
+            padding: 60px 20px; 
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: var(--accent-color);
+            color: #0b0f19;
+            border-color: var(--accent-color);
+        }
     </style>
 </head>
 <body>
@@ -26,45 +186,80 @@
     <a href="#contact">Contact</a>
 </nav>
 
-<section id="about">
+<section id="about" class="hero">
     <h1>Aditya Kori</h1>
-    <p><strong>Design Verification Engineer</strong></p>
-    <p>Trained Design Verification Engineer with hands-on experience in SystemVerilog, UVM, AXI Protocol Validation, and debugging using QuestaSim/ModelSim and Synopsys Verdi. I have a strong foundation in digital logic, SoC concepts, and functional verification workflows.</p>
+    <div class="subtitle">Design Verification Engineer</div>
+    <p>Trained Design Verification Engineer with hands-on experience in SystemVerilog, UVM, AXI Protocol Validation, and debugging using QuestaSim/ModelSim and Synopsys Verdi. Specializing in building reusable UVM testbench architectures and verification workflows on Linux server environments.</p>
 </section>
 
 <section id="skills">
-    <h2>Technical Skills</h2>
-    <div class="card">
-        <p><strong>Hardware & Verification:</strong> Verilog, SystemVerilog, UVM</p>
-        <p><strong>Programming:</strong> Python, C</p>
-        <p><strong>Tools:</strong> ModelSim/QuestaSim, Synopsys Verdi, Linux, Git, EDA Playground</p>
-        <p><strong>IoT:</strong> NodeMCU, Arduino IoT Cloud, Azure Cognitive Services</p>
+    <h2><i class="fa-solid fa-microchip"></i> Technical Skills</h2>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Verification & HDLs</h3>
+            <div class="tag-group">
+                <span class="tag">SystemVerilog</span>
+                <span class="tag">UVM Framework</span>
+                <span class="tag">Verilog RTL</span>
+                <span class="tag">SVA (Assertions)</span>
+            </div>
+        </div>
+        <div class="card">
+            <h3>EDA Tools & Platform</h3>
+            <div class="tag-group">
+                <span class="tag">Synopsys Verdi</span>
+                <span class="tag">QuestaSim / ModelSim</span>
+                <span class="tag">Linux / Remote Servers</span>
+                <span class="tag">Git</span>
+            </div>
+        </div>
     </div>
 </section>
 
 <section id="projects">
-    <h2>Projects</h2>
-    <div class="card">
-        <h3>AXI Protocol Validation</h3>
-        <p>Developed a UVM environment to validate AXI Protocol features and complex transaction scenarios.</p>
-    </div>
-    <div class="card">
-        <h3>Asynchronous FIFO Design & Verification</h3>
-        <p>Verified an Asynchronous FIFO design enabling data transfer across different clock domains.</p>
+    <h2><i class="fa-solid fa-code-branch"></i> Verification Projects</h2>
+    <div class="grid-2">
+        <div class="card">
+            <h3>AXI Protocol Validation</h3>
+            <p>Developed a comprehensive UVM environment to validate key AXI features, multi-burst transaction scenarios, and complex out-of-order transfers using Synopsys Verdi.</p>
+            <span class="tag">UVM</span> <span class="tag">AXI4</span> <span class="tag">Verdi</span>
+        </div>
+        <div class="card">
+            <h3>Asynchronous FIFO Design & Verification</h3>
+            <p>Verified pointer synchronization, Clock Domain Crossing (CDC) mechanics, and robustness using a SystemVerilog/UVM environment.</p>
+            <a href="https://github.com/Aditya-kori/Asynchronous-FIFO-Pre" class="repo-link" target="_blank"><i class="fa-brands fa-github"></i> View Repository</a>
+        </div>
+        <div class="card">
+            <h3>UVM-Based Memory Verification</h3>
+            <p>Designed a custom Memory block in Verilog and fully verified read/write operations and boundary conditions through targeted covergroups.</p>
+            <a href="https://github.com/Aditya-kori/Memory-Project-Pre" class="repo-link" target="_blank"><i class="fa-brands fa-github"></i> View Repository</a>
+        </div>
+        <div class="card">
+            <h3>IoT Water Rescue Boat</h3>
+            <p>Developed an embedded system utilizing NodeMCU and Arduino IoT Cloud for telemetry monitoring and real-time boat tracking controls.</p>
+            <a href="https://github.com/Aditya-kori/waterBoat_dec13a" class="repo-link" target="_blank"><i class="fa-brands fa-github"></i> View Repository</a>
+        </div>
     </div>
 </section>
 
 <section id="education">
-    <h2>Education</h2>
-    <p><strong>Navodaya Institute of Technology, Raichur</strong> (2021-2025)</p>
-    <p>B.E. (HONS.) in Electronics and Communication Engineering - CGPA: 9.31</p>
+    <h2><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+    <div class="card" style="border-left: 4px solid var(--accent-color);">
+        <h3>Bachelor of Engineering with Honours (B.E. Hons)</h3>
+        <p style="color: var(--accent-color); font-weight: 600; margin-bottom: 5px;">Electronics and Communication Engineering</p>
+        <p>Navodaya Institute of Technology, Raichur (2021 - 2025) • <strong>CGPA: 9.31</strong></p>
+    </div>
 </section>
 
-<section id="contact" class="contact-info">
-    <h2>Contact</h2>
-    <p>Email: 16adityakori@gmail.com</p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/aditya-kori-21b909292" style="color:white;">Aditya Kori</a></p>
-</section>
+<footer id="contact">
+    <h2>Get In Touch</h2>
+    <p style="color: var(--text-muted); margin-bottom: 20px;">Feel free to connect with me for opportunities in VLSI and Functional Verification.</p>
+    <div class="contact-buttons">
+        <a href="mailto:16adityakori@gmail.com" class="btn"><i class="fa-solid fa-envelope"></i> Email Me</a>
+        <a href="https://linkedin.com/in/aditya-kori-21b909292" target="_blank" class="btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a href="https://github.com/Aditya-kori" target="_blank" class="btn"><i class="fa-brands fa-github"></i> GitHub</a>
+    </div>
+</footer>
 
 </body>
 </html>
