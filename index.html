@@ -11,13 +11,31 @@
     <style>
         /* Modern Premium Tech Aesthetic Styles */
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #161b26;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --accent-color: #38bdf8;
-            --accent-hover: #0ea5e9;
-            --border-color: #242b3d;
+            /* Dark Mode Colors (Default) */
+            --bg-color: #2e3440;
+            --card-bg: #3b4252;
+            --text-main: #eceff4;
+            --text-muted: #d8dee9;
+            --accent-color: #88c0d0;
+            --accent-hover: #81a1c1;
+            --border-color: #4c566a;
+            --nav-bg: rgba(11, 15, 25, 0.85);
+            --footer-bg: #070a10;
+            --tag-bg: #1e293b;
+        }
+
+        /* Light Mode Colors */
+        html[data-theme="light"] {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --accent-color: #0ea5e9;
+            --accent-hover: #0284c7;
+            --border-color: #e5e7eb;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --footer-bg: #f3f4f6;
+            --tag-bg: #e0f2fe;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,7 +45,8 @@
             font-family: 'Inter', sans-serif; 
             background-color: var(--bg-color); 
             color: var(--text-main); 
-            line-height: 1.7; 
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Fixed Navigation Bar */
@@ -35,14 +54,16 @@
             position: fixed; 
             top: 0; 
             width: 100%;
-            background: rgba(11, 15, 25, 0.85); 
+            background: var(--nav-bg); 
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             padding: 1rem 2rem; 
             display: flex; 
-            justify-content: top-right; 
+            justify-content: center;
+            align-items: center;
             gap: 30px; 
-            z-index: 1000; 
+            z-index: 1000;
+            transition: border-color 0.3s ease;
         }
         nav a { 
             color: var(--text-muted); 
@@ -52,6 +73,31 @@
             transition: color 0.3s ease;
         }
         nav a:hover { color: var(--accent-color); }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 1.2rem;
+            right: 2rem;
+            z-index: 1001;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            transform: scale(1.1);
+        }
 
         /* Hero / About Section Layout */
         .hero {
@@ -65,9 +111,10 @@
             font-weight: 700; 
             letter-spacing: -0.05em;
             margin-bottom: 10px;
-            background: linear-gradient(to right, #ffffff, #38bdf8);
+            background: linear-gradient(to right, var(--text-main), var(--accent-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .hero .subtitle {
             font-size: 1.25rem;
@@ -88,6 +135,7 @@
             max-width: 900px; 
             margin: auto; 
             border-top: 1px solid var(--border-color);
+            transition: border-color 0.3s ease;
         }
         h2 { 
             font-size: 1.8rem; 
@@ -96,6 +144,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            color: var(--text-main);
         }
         h2 i { color: var(--accent-color); font-size: 1.4rem; }
 
@@ -111,13 +160,19 @@
             padding: 25px; 
             border: 1px solid var(--border-color);
             border-radius: 12px; 
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
+
+        html[data-theme="light"] .card {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
         .card:hover { 
             transform: translateY(-4px);
             border-color: var(--accent-color);
         }
-        .card h3 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
+        .card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--text-main); }
         .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; }
         
         .repo-link {
@@ -128,26 +183,33 @@
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 600;
+            transition: color 0.3s ease;
         }
         .repo-link:hover { color: var(--accent-hover); }
 
         /* Tag Pill Badges */
         .tag-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
         .tag {
-            background: #1e293b;
+            background: var(--tag-bg);
             color: var(--accent-color);
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        html[data-theme="light"] .tag {
+            border: 1px solid var(--accent-color);
         }
 
         /* Footer & Contact Section */
         footer { 
-            background: #070a10; 
+            background: var(--footer-bg); 
             padding: 60px 20px; 
             text-align: center;
             border-top: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .contact-buttons {
             display: flex;
@@ -159,7 +221,7 @@
         .btn {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            color: #fff;
+            color: var(--text-main);
             padding: 10px 20px;
             border-radius: 8px;
             text-decoration: none;
@@ -171,12 +233,24 @@
         }
         .btn:hover {
             background: var(--accent-color);
-            color: #0b0f19;
+            color: var(--bg-color);
             border-color: var(--accent-color);
+        }
+
+        /* Smooth transitions for theme changes */
+        * {
+            transition-property: background-color, border-color, color;
+            transition-duration: 0.3s;
+            transition-timing-function: ease;
         }
     </style>
 </head>
 <body>
+
+<!-- Theme Toggle Button -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <i class="fa-solid fa-sun"></i>
+</button>
 
 <nav>
     <a href="#about">About</a>
@@ -189,7 +263,7 @@
 <section id="about" class="hero">
     <h1>Aditya Kori</h1>
     <div class="subtitle">Design Verification Engineer</div>
-    <p>Trained Design Verification Engineer with hands-on experience in SystemVerilog, UVM, AXI Protocol Validation, and debugging using QuestaSim/ModelSim and Synopsys Verdi. Specializing in building reusable UVM testbench architectures and verification workflows on Linux server environments.</p>
+    <p>Trained Design Verification Engineer with hands-on experience in SystemVerilog, UVM, AXI Protocol Validation, and debugging using QuestaSim/ModelSim and Synopsys Verdi. Specializing in building robust verification environments and debugging complex digital systems.</p>
 </section>
 
 <section id="skills">
@@ -251,7 +325,7 @@
     </div>
 </section>
 
-    <!-- NEW PUBLICATION SECTION -->
+<!-- PUBLICATION SECTION -->
 <section id="publications">
     <h2><i class="fa-solid fa-book"></i> Academic Publications</h2>
     <div class="card" style="border-left: 4px solid #10b981;">
@@ -273,6 +347,45 @@
         <a href="https://github.com/Aditya-kori" target="_blank" class="btn"><i class="fa-brands fa-github"></i> GitHub</a>
     </div>
 </footer>
+
+<script>
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    // Check for saved theme preference or default to dark mode
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', currentTheme);
+    updateThemeIcon(currentTheme);
+
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+        const theme = html.getAttribute('data-theme');
+        const newTheme = theme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    });
+
+    // Update icon based on current theme
+    function updateThemeIcon(theme) {
+        if (theme === 'dark') {
+            themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            themeToggle.setAttribute('title', 'Switch to Light Mode');
+        } else {
+            themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            themeToggle.setAttribute('title', 'Switch to Dark Mode');
+        }
+    }
+
+    // Optional: Respect system preference on first visit
+    if (!localStorage.getItem('theme')) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = prefersDark ? 'dark' : 'light';
+        html.setAttribute('data-theme', theme);
+        updateThemeIcon(theme);
+    }
+</script>
 
 </body>
 </html>
